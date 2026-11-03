@@ -1,0 +1,70 @@
+"""The 33 BlazePose landmark indices and skeleton connections.
+
+Defined here rather than imported from MediaPipe so the classifier and its
+tests run without MediaPipe installed.
+"""
+
+from __future__ import annotations
+
+from enum import IntEnum
+
+
+class Landmark(IntEnum):
+    NOSE = 0
+    LEFT_EYE_INNER = 1
+    LEFT_EYE = 2
+    LEFT_EYE_OUTER = 3
+    RIGHT_EYE_INNER = 4
+    RIGHT_EYE = 5
+    RIGHT_EYE_OUTER = 6
+    LEFT_EAR = 7
+    RIGHT_EAR = 8
+    MOUTH_LEFT = 9
+    MOUTH_RIGHT = 10
+    LEFT_SHOULDER = 11
+    RIGHT_SHOULDER = 12
+    LEFT_ELBOW = 13
+    RIGHT_ELBOW = 14
+    LEFT_WRIST = 15
+    RIGHT_WRIST = 16
+    LEFT_PINKY = 17
+    RIGHT_PINKY = 18
+    LEFT_INDEX = 19
+    RIGHT_INDEX = 20
+    LEFT_THUMB = 21
+    RIGHT_THUMB = 22
+    LEFT_HIP = 23
+    RIGHT_HIP = 24
+    LEFT_KNEE = 25
+    RIGHT_KNEE = 26
+    LEFT_ANKLE = 27
+    RIGHT_ANKLE = 28
+    LEFT_HEEL = 29
+    RIGHT_HEEL = 30
+    LEFT_FOOT_INDEX = 31
+    RIGHT_FOOT_INDEX = 32
+
+
+L = Landmark
+
+POSE_CONNECTIONS: tuple[tuple[int, int], ...] = (
+    # face
+    (L.NOSE, L.LEFT_EYE_INNER), (L.LEFT_EYE_INNER, L.LEFT_EYE), (L.LEFT_EYE, L.LEFT_EYE_OUTER),
+    (L.LEFT_EYE_OUTER, L.LEFT_EAR), (L.NOSE, L.RIGHT_EYE_INNER), (L.RIGHT_EYE_INNER, L.RIGHT_EYE),
+    (L.RIGHT_EYE, L.RIGHT_EYE_OUTER), (L.RIGHT_EYE_OUTER, L.RIGHT_EAR), (L.MOUTH_LEFT, L.MOUTH_RIGHT),
+    # torso
+    (L.LEFT_SHOULDER, L.RIGHT_SHOULDER), (L.LEFT_SHOULDER, L.LEFT_HIP),
+    (L.RIGHT_SHOULDER, L.RIGHT_HIP), (L.LEFT_HIP, L.RIGHT_HIP),
+    # arms and hands
+    (L.LEFT_SHOULDER, L.LEFT_ELBOW), (L.LEFT_ELBOW, L.LEFT_WRIST),
+    (L.LEFT_WRIST, L.LEFT_PINKY), (L.LEFT_WRIST, L.LEFT_INDEX), (L.LEFT_WRIST, L.LEFT_THUMB),
+    (L.LEFT_PINKY, L.LEFT_INDEX),
+    (L.RIGHT_SHOULDER, L.RIGHT_ELBOW), (L.RIGHT_ELBOW, L.RIGHT_WRIST),
+    (L.RIGHT_WRIST, L.RIGHT_PINKY), (L.RIGHT_WRIST, L.RIGHT_INDEX), (L.RIGHT_WRIST, L.RIGHT_THUMB),
+    (L.RIGHT_PINKY, L.RIGHT_INDEX),
+    # legs and feet
+    (L.LEFT_HIP, L.LEFT_KNEE), (L.LEFT_KNEE, L.LEFT_ANKLE),
+    (L.LEFT_ANKLE, L.LEFT_HEEL), (L.LEFT_HEEL, L.LEFT_FOOT_INDEX), (L.LEFT_ANKLE, L.LEFT_FOOT_INDEX),
+    (L.RIGHT_HIP, L.RIGHT_KNEE), (L.RIGHT_KNEE, L.RIGHT_ANKLE),
+    (L.RIGHT_ANKLE, L.RIGHT_HEEL), (L.RIGHT_HEEL, L.RIGHT_FOOT_INDEX), (L.RIGHT_ANKLE, L.RIGHT_FOOT_INDEX),
+)
