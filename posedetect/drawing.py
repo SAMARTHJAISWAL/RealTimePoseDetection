@@ -2,13 +2,14 @@
 
 from __future__ import annotations
 
-from typing import Sequence
+from collections.abc import Sequence
 
 import cv2
 import numpy as np
 
 from posedetect.classifier import JointAngles, Pose
-from posedetect.landmarks import POSE_CONNECTIONS, Landmark as L
+from posedetect.landmarks import POSE_CONNECTIONS
+from posedetect.landmarks import Landmark as L
 
 GREEN = (80, 220, 100)
 RED = (60, 60, 230)

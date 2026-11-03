@@ -6,9 +6,9 @@ whichever side of the body leads and whether or not the frame is mirrored.
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 from dataclasses import asdict, dataclass
 from enum import Enum
-from typing import Sequence
 
 from posedetect.angles import joint_angle
 from posedetect.landmarks import Landmark as L

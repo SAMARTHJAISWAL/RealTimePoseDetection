@@ -4,6 +4,10 @@ on:
   push:
     branches: [main]
   pull_request:
+  schedule:
+    # Weekly, so a breaking MediaPipe release is caught even without new commits.
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
 
 jobs:
   test:
@@ -16,5 +20,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/posedetect
+          key: pose-models-v1
       - run: pip install -e ".[dev]"
+      - run: ruff check .
       - run: pytest -v

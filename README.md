@@ -149,8 +149,8 @@ RealTimePoseDetection/
 │   ├── landmarks.py        # the 33 landmark indices and skeleton edges
 │   ├── smoothing.py        # majority-vote label smoothing
 │   └── drawing.py          # OpenCV overlays
-├── tests/                  # pytest suite (no camera or model needed)
-├── assets/                 # screenshots used in this README
+├── tests/                  # pytest suite (no camera needed)
+├── assets/                 # sample screenshots, also used by the tests
 ├── requirements.txt
 └── pyproject.toml
 ```
@@ -159,12 +159,19 @@ RealTimePoseDetection/
 
 ```bash
 pip install -e ".[dev]"
-pytest
+pytest                    # everything
+pytest -m "not model"     # unit tests only: fast, works offline
+ruff check .              # lint
 ```
 
-The tests cover the angle maths, every pose rule (including mirrored poses and
-near-misses), the visibility check, and label smoothing. They don't need a
-camera or the MediaPipe model.
+- **Unit tests** cover the angle maths, every pose rule (including mirrored
+  poses and near-misses), the visibility check, and label smoothing.
+- **End-to-end tests** (`tests/test_end_to_end.py`) run the real MediaPipe
+  model on the sample images in `assets/` and through the CLI. They catch
+  breaking MediaPipe releases, and CI runs them every week for that reason.
+  They download the model on first run.
+
+No camera is needed for either.
 
 ## Troubleshooting
 

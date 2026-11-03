@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 from collections import Counter, deque
-from typing import Generic, Hashable, TypeVar
+from collections.abc import Hashable
+from typing import Generic, TypeVar
 
 T = TypeVar("T", bound=Hashable)
 
