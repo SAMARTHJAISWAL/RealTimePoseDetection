@@ -4,6 +4,7 @@
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue)
 ![MediaPipe](https://img.shields.io/badge/MediaPipe-Pose%20Landmarker-orange)
 ![OpenCV](https://img.shields.io/badge/OpenCV-4.x-green)
+[![License: MIT](https://img.shields.io/badge/license-MIT-yellow)](LICENSE)
 
 Tracks **33 body landmarks** from a webcam, video, or image with Google's
 [MediaPipe Pose Landmarker](https://ai.google.dev/edge/mediapipe/solutions/vision/pose_landmarker),
@@ -212,6 +213,10 @@ No camera is needed for either.
 
 Issues and pull requests are welcome, and new poses are especially welcome.
 Please add a test for any new rule and run `pytest` before opening a PR.
+
+## License
+
+[MIT](LICENSE) © Samarth Jaiswal
 
 ## Acknowledgments
 
