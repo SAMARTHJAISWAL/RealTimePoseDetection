@@ -42,6 +42,9 @@ python main.py
 
 On first run, the pose model (about 9 MB) is downloaded to `~/.cache/posedetect/`.
 
+> **Linux:** MediaPipe needs the system OpenGL/EGL libraries. On Debian or
+> Ubuntu, run `sudo apt install libegl1 libgles2 libgl1` first.
+
 > **macOS:** run this from the **Terminal** app (or iTerm) and click **Allow**
 > when it asks for camera access. Terminals built into editors and other apps
 > often have no camera permission, so the camera fails to open. See
@@ -190,6 +193,9 @@ No camera is needed for either.
   classifier needs the ankles. Press `a` to check the angles against the
   table above.
 - **Low FPS**: use `--model lite`.
+- **`OSError: libEGL.so.1: cannot open shared object file` (Linux)**: install
+  the graphics libraries MediaPipe needs:
+  `sudo apt install libegl1 libgles2 libgl1`.
 - **`AttributeError: module 'mediapipe' has no attribute 'solutions'`**: you
   are running the old v1 script. Recent MediaPipe releases removed the legacy
   `solutions` API, so pull the latest version of this repo, which uses the

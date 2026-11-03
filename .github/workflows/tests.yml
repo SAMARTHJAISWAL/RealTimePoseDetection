@@ -24,6 +24,8 @@ jobs:
         with:
           path: ~/.cache/posedetect
           key: pose-models-v1
+      - name: Install MediaPipe system libraries
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libegl1 libgles2 libgl1
       - run: pip install -e ".[dev]"
       - run: ruff check .
       - run: pytest -v
