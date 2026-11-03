@@ -42,12 +42,26 @@ python main.py
 
 On first run, the pose model (about 9 MB) is downloaded to `~/.cache/posedetect/`.
 
+> **macOS:** run this from the **Terminal** app (or iTerm) and click **Allow**
+> when it asks for camera access. Terminals built into editors and other apps
+> often have no camera permission, so the camera fails to open. See
+> [Troubleshooting](#troubleshooting).
+
 Step back until your whole body, feet included, is in the frame, then try a pose.
 
 | Key | Action |
 |---|---|
 | `a` | Toggle joint-angle overlay |
 | `q` / `Esc` | Quit |
+
+### No webcam? Try a sample image
+
+```bash
+python main.py --image assets/warrior_ii.jpg --show-angles
+```
+
+This prints `Pose: Warrior II Pose` and opens the annotated image. Press any
+key to close it.
 
 ## Usage
 
@@ -154,8 +168,17 @@ camera or the MediaPipe model.
 
 ## Troubleshooting
 
-- **"could not open camera 0"**: try `--camera 1`. On macOS, allow camera
-  access for your terminal or IDE in *System Settings → Privacy & Security → Camera*.
+- **"not authorized to capture video" / "could not open camera 0" (macOS)**:
+  the app you ran it from doesn't have camera permission.
+  1. Run it from the **Terminal** app or iTerm instead of a terminal built into
+     an editor or another app.
+  2. Click **Allow** when macOS asks for camera access.
+  3. If no prompt appears, open *System Settings → Privacy & Security → Camera*,
+     turn on your terminal app, then quit and reopen it.
+- **"could not open camera 0" (any OS)**: another app such as Zoom, Meet, or
+  FaceTime may be using the camera, so close it. With several cameras, try
+  `--camera 1`. On Linux, check that your user can read `/dev/video0`
+  (usually by joining the `video` group).
 - **Always "Unknown Pose"**: make sure your feet are in the frame, because the
   classifier needs the ankles. Press `a` to check the angles against the
   table above.
