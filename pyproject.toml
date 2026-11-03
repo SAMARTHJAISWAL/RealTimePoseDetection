@@ -8,6 +8,7 @@ version = "2.0.0"
 description = "Real-time human pose detection and yoga/fitness pose classification with MediaPipe and OpenCV"
 readme = "README.md"
 requires-python = ">=3.9"
+license = { text = "MIT" }
 authors = [{ name = "Samarth Jaiswal" }]
 dependencies = [
     "mediapipe>=0.10.14",
