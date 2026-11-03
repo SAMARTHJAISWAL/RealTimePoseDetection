@@ -12,8 +12,7 @@ from pathlib import Path
 import cv2
 import mediapipe as mp
 import numpy as np
-from mediapipe.tasks.python import BaseOptions
-from mediapipe.tasks.python import vision
+from mediapipe.tasks.python import BaseOptions, vision
 
 MODEL_URL = (
     "https://storage.googleapis.com/mediapipe-models/pose_landmarker/"
@@ -107,7 +106,7 @@ class PoseDetector:
     def close(self) -> None:
         self._landmarker.close()
 
-    def __enter__(self) -> "PoseDetector":
+    def __enter__(self) -> PoseDetector:
         return self
 
     def __exit__(self, *exc) -> None:

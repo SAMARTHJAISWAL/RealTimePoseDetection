@@ -42,6 +42,9 @@ python main.py
 
 On first run, the pose model (about 9 MB) is downloaded to `~/.cache/posedetect/`.
 
+> **Linux:** MediaPipe needs the system OpenGL/EGL libraries. On Debian or
+> Ubuntu, run `sudo apt install libegl1 libgles2 libgl1` first.
+
 > **macOS:** run this from the **Terminal** app (or iTerm) and click **Allow**
 > when it asks for camera access. Terminals built into editors and other apps
 > often have no camera permission, so the camera fails to open. See
@@ -149,8 +152,8 @@ RealTimePoseDetection/
 │   ├── landmarks.py        # the 33 landmark indices and skeleton edges
 │   ├── smoothing.py        # majority-vote label smoothing
 │   └── drawing.py          # OpenCV overlays
-├── tests/                  # pytest suite (no camera or model needed)
-├── assets/                 # screenshots used in this README
+├── tests/                  # pytest suite (no camera needed)
+├── assets/                 # sample screenshots, also used by the tests
 ├── requirements.txt
 └── pyproject.toml
 ```
@@ -159,12 +162,19 @@ RealTimePoseDetection/
 
 ```bash
 pip install -e ".[dev]"
-pytest
+pytest                    # everything
+pytest -m "not model"     # unit tests only: fast, works offline
+ruff check .              # lint
 ```
 
-The tests cover the angle maths, every pose rule (including mirrored poses and
-near-misses), the visibility check, and label smoothing. They don't need a
-camera or the MediaPipe model.
+- **Unit tests** cover the angle maths, every pose rule (including mirrored
+  poses and near-misses), the visibility check, and label smoothing.
+- **End-to-end tests** (`tests/test_end_to_end.py`) run the real MediaPipe
+  model on the sample images in `assets/` and through the CLI. They catch
+  breaking MediaPipe releases, and CI runs them every week for that reason.
+  They download the model on first run.
+
+No camera is needed for either.
 
 ## Troubleshooting
 
@@ -183,6 +193,9 @@ camera or the MediaPipe model.
   classifier needs the ankles. Press `a` to check the angles against the
   table above.
 - **Low FPS**: use `--model lite`.
+- **`OSError: libEGL.so.1: cannot open shared object file` (Linux)**: install
+  the graphics libraries MediaPipe needs:
+  `sudo apt install libegl1 libgles2 libgl1`.
 - **`AttributeError: module 'mediapipe' has no attribute 'solutions'`**: you
   are running the old v1 script. Recent MediaPipe releases removed the legacy
   `solutions` API, so pull the latest version of this repo, which uses the
